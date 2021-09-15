@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - java -version
+      - pwd
+      - ps -ef
+      - df -h
+      - uname -a
+      - which mvn
+  build:
+    on-failure: ABORT
+    commands:
+      - mvn install
+  post_build:
+    on-failure: ABORT
+    commands:
+      - mvn package
+artifacts:
+  files:
+    - target/com.foobah.maven-1.0-SNAPSHOT.jar
+  discard-paths: yes
